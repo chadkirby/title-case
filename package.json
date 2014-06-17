@@ -1,0 +1,16 @@
+{
+  "name": "title-case",
+  "version": "0.0.1",
+  "description": "Properly put English strings in title case, mostly following the Yahoo! Style Guide",
+  "main": "lib/title-case.js",
+  "scripts": {
+    "test": "cake test"
+  },
+  "repository": "",
+  "keywords": [
+    "title",
+    "case"
+  ],
+  "author": "Chad Kirby",
+  "license": "MIT"
+}
