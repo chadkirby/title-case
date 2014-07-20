@@ -63,10 +63,12 @@ titleCase = module.exports = (string, options = {}) ->
    arr = string
       .replace(/^\s+/, (match) -> leadingSpace = match; '')
       .replace(/\s+$/, (match) -> trailingSpace = match; '')
-      .split /([-–\/]|[”’'"\)\]\}]*\s+[“‘'"\(\[\{]*)/
+      .split /(\b\w[-–]\w\b|[-–\/]|[”’'"\)\]\}]*\s+[“‘'"\(\[\{]*)/
 
    last = arr.length - 1
-   words = for word, ii in arr when word.length > 0
+   ii = -1
+   words = for word in arr when word.length > 0
+      ii++
       if ii%2 # every other item in arr is white space
          word
 
@@ -96,6 +98,9 @@ titleCase = module.exports = (string, options = {}) ->
                yes # capitalize all else
 
          switch
+            when /\b\w[-–]\w\b/.test(word) # range
+               word.toUpperCase()
+               
             when iPhone and capitalize
                # word.replace /\w/, (letter) -> letter.toUpperCase()
                word[0].toUpperCase() + word[1..]
@@ -120,4 +125,5 @@ if require.main is module
       console.log {error, stdout, stderr}
       require '../test/test'
    console.log titleCase "signaling ‘soft’ client (monkey)"
+   console.log titleCase "Askee Devices a–c"
 
